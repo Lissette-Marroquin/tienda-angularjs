@@ -1,0 +1,73 @@
+/* =========================================
+   Tienda en línea - estilos propios
+   Framework: Bootstrap 4.6 (desde CDN)
+   ========================================= */
+
+:root {
+  --principal: #1f4e79;
+  --acento: #e8a33d;
+  --fondo: #f5f6f8;
+  --texto: #222;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ---------- Barra superior ---------- */
+.navbar {
+  background: var(--principal);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #fff !important;
+}
+
+.btn-carrito {
+  background: var(--acento);
+  color: #fff;
+  font-weight: bold;
+}
+
+/* ---------- Cards de productos ---------- */
+.card-producto {
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+
+/* Las imágenes del JSON tienen tamaños distintos, así todas se ven iguales */
+.card-producto img {
+  height: 200px;
+  object-fit: contain;
+  padding: 15px;
+}
+
+.card-producto .card-title {
+  font-size: 15px;
+  height: 45px;
+  overflow: hidden;
+}
+
+.precio {
+  color: var(--principal);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.categoria {
+  color: #888;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+footer {
+  color: #888;
+  font-size: 13px;
+  padding: 20px 0;
+  text-align: center;
+}
