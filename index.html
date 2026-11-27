@@ -67,16 +67,32 @@
   <main class="container my-4">
 
     <!-- ===== FILTROS ===== -->
-    <!-- PENDIENTE (Fernando): dropdown de categorías, label "Productos de la categoría: ..." y buscador por nombre -->
-    <h2 class="h4 mb-3">Productos</h2>
+    <div class="barra-productos mb-4" ng-hide="cargando || error">
+      <h2 class="barra-productos__titulo h4 mb-0">
+        Productos de la categoría: <span class="barra-productos__categoria">{{ etiquetaCategoria() }}</span>
+      </h2>
+      <div class="barra-productos__controles">
+        <input type="text" class="form-control busqueda-productos" ng-model="busqueda" placeholder="Buscar por nombre…" aria-label="Buscar productos por nombre">
+        <select class="form-control barra-productos__select" ng-model="categoriaSeleccionada" aria-label="Filtrar por categoría">
+          <option value="">Categoría</option>
+          <option ng-repeat="cat in categorias" value="{{ cat }}">{{ cat }}</option>
+        </select>
+        <select class="form-control barra-productos__select" ng-model="opcionOrden" ng-change="actualizarOrden()" aria-label="Ordenar productos">
+          <option value="nombre-asc">Nombre (A → Z)</option>
+          <option value="nombre-desc">Nombre (Z → A)</option>
+          <option value="precio-asc">Precio (menor a mayor)</option>
+          <option value="precio-desc">Precio (mayor a menor)</option>
+        </select>
+      </div>
+    </div>
 
     <!-- Mensajes mientras carga o si hay error -->
     <p class="text-muted" ng-show="cargando">Cargando productos...</p>
     <div class="alert alert-danger" ng-show="error">{{ error }}</div>
 
     <!-- ===== CARDS DE PRODUCTOS (se llenan con ng-repeat) ===== -->
-    <div class="row">
-      <div class="col-sm-6 col-md-4 col-lg-3 mb-4" ng-repeat="producto in productos">
+    <div class="row" ng-hide="cargando || error">
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-4" ng-repeat="producto in productos | filter:filtroPorCategoria | filter:{title: busqueda} | orderBy:campoOrden:ordenInverso">
         <div class="card card-producto">
           <img ng-src="{{ producto.image }}" class="card-img-top" alt="{{ producto.title }}">
           <div class="card-body d-flex flex-column">

@@ -11,9 +11,37 @@ app.controller("TiendaController", function ($scope, ProductoService) {
   $scope.cargando = true;       // muestra el mensaje "Cargando..."
   $scope.error = "";            // mensaje si falla el servicio web
 
-  // ---------- Filtros (los usa Fernando) ----------
+  // ---------- Filtros ----------
   $scope.categoriaSeleccionada = "";  // "" = todas las categorías
   $scope.busqueda = "";               // texto del buscador por nombre
+
+  // ---------- Ordenamiento ----------
+  $scope.opcionOrden = "nombre-asc";
+  $scope.campoOrden = "title";
+  $scope.ordenInverso = false;
+
+  const mapaOrden = {
+    "nombre-asc": { campo: "title", inverso: false },
+    "nombre-desc": { campo: "title", inverso: true },
+    "precio-asc": { campo: "price", inverso: false },
+    "precio-desc": { campo: "price", inverso: true }
+  };
+
+  $scope.actualizarOrden = function () {
+    const config = mapaOrden[$scope.opcionOrden];
+    if (config) {
+      $scope.campoOrden = config.campo;
+      $scope.ordenInverso = config.inverso;
+    }
+  };
+
+  $scope.filtroPorCategoria = function (producto) {
+    return ProductoService.coincideCategoria(producto, $scope.categoriaSeleccionada);
+  };
+
+  $scope.etiquetaCategoria = function () {
+    return $scope.categoriaSeleccionada || "Todas las categorías";
+  };
 
   // ---------- Detalles y carrito (los usan José y Josué) ----------
   $scope.productoSeleccionado = null; // producto que se ve en el modal de detalles
@@ -23,13 +51,7 @@ app.controller("TiendaController", function ($scope, ProductoService) {
   ProductoService.obtenerProductos()
     .then(function (productos) {
       $scope.productos = productos;
-
-      // Se sacan las categorías de los productos, sin repetirlas
-      productos.forEach(function (producto) {
-        if ($scope.categorias.indexOf(producto.category) === -1) {
-          $scope.categorias.push(producto.category);
-        }
-      });
+      $scope.categorias = ProductoService.obtenerCategoriasUnicas(productos);
     })
     .catch(function () {
       $scope.error = "No se pudieron cargar los productos. Revise su conexión a internet.";
