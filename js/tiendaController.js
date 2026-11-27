@@ -66,9 +66,71 @@ app.controller("TiendaController", function ($scope, ProductoService) {
     // PENDIENTE (José): abrir el modal de detalles, por ejemplo con $("#modalDetalles").modal("show")
   };
 
-  // PENDIENTE (Josué): funciones del carrito
-  // agregarAlCarrito(producto), totalCarrito() y pagar()
-  $scope.totalCarrito = function () {
-    return 0;
+  // ---------- Carrito de compras (Josué) ----------
+
+  // Agregar un producto al carrito
+  $scope.agregarAlCarrito = function (producto) {
+
+    var encontrado = $scope.carrito.find(function (item) {
+      return item.producto.id === producto.id;
+    });
+
+    if (encontrado) {
+      // Si ya existe, aumentar la cantidad
+      encontrado.cantidad++;
+    } else {
+      // Si no existe, agregarlo al carrito
+      $scope.carrito.push({
+        producto: producto,
+        cantidad: 1
+      });
+    }
   };
+
+  // Calcular el total de la compra
+  $scope.totalCarrito = function () {
+    var total = 0;
+
+    $scope.carrito.forEach(function (item) {
+      total += item.producto.price * item.cantidad;
+    });
+
+    return total;
+  };
+
+  // Eliminar un producto del carrito
+  $scope.eliminarDelCarrito = function (indice) {
+    $scope.carrito.splice(indice, 1);
+  };
+
+  // Realizar el pago simulado
+  $scope.pagar = function () {
+
+    // Comprobar si hay productos
+    if ($scope.carrito.length === 0) {
+      alert("El carrito está vacío.");
+      return;
+    }
+
+    // Obtener el total
+    var total = $scope.totalCarrito();
+
+    // Pedir confirmación al cliente
+    var confirmar = confirm(
+      "¿Deseas confirmar tu compra por $" +
+      total.toFixed(2) + "?"
+    );
+
+    // Si confirma, finalizar la compra
+    if (confirmar) {
+      $scope.carrito = [];
+
+      // Cerrar el modal del carrito
+      $("#modalCarrito").modal("hide");
+
+      // Mostrar mensaje de éxito
+      alert("¡Compra realizada exitosamente!");
+    }
+  };
+
 });
