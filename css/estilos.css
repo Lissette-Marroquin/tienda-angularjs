@@ -32,6 +32,63 @@ body {
   font-weight: bold;
 }
 
+/* ---------- Barra de filtros de productos ---------- */
+.barra-productos {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.barra-productos__titulo {
+  font-weight: bold;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barra-productos__categoria {
+  color: var(--principal);
+  font-weight: 600;
+}
+
+.barra-productos__controles {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+  margin-top: 3%;
+}
+
+.busqueda-productos,
+.barra-productos__select {
+  border-radius: 999px;
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+.busqueda-productos {
+  flex: 1 1 320px;
+  min-width: 100px;
+  max-width: 280px;
+  width: auto;
+}
+
+.barra-productos__select {
+  flex: 0 0 132px;
+  width: 132px;
+  padding-left: 0.75rem;
+  padding-right: 1.75rem;
+}
+
+.barra-productos__select:last-child {
+  flex: 0 0 168px;
+  width: 168px;
+}
+
 /* ---------- Cards de productos ---------- */
 .card-producto {
   height: 100%;
