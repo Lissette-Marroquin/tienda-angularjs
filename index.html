@@ -14,11 +14,14 @@
     <!-- nombre definitivo de la tienda (Orlando)(vende libros) -->
     <span class="navbar-brand tienda-marca">Cuscatlán Books</span>
 
-    <!-- Carrito arriba a la derecha con el total -->
-    <!-- PENDIENTE (Josué): abrir el modal del carrito al hacer clic -->
-    <button class="btn btn-carrito" type="button">
+    <!-- Carrito de compras (Josué) -->
+    <button class="btn btn-carrito"
+            type="button"
+            data-toggle="modal"
+            data-target="#modalCarrito">
       🛒 Carrito: {{ totalCarrito() | currency:"$" }}
     </button>
+
   </nav>
 
    <!-- ===== SLIDER (Orlando) Bootstrap carousel, 3 imágenes ===== -->
@@ -108,7 +111,118 @@
 
   <!-- ===== MODALES ===== -->
   <!-- PENDIENTE (José): modal de detalles del producto con botones Agregar y Cancelar -->
-  <!-- PENDIENTE (Josué): modal del carrito con detalle, cantidad, total y botón Pagar -->
+  
+  <!-- ===== MODAL DEL CARRITO (JOSUÉ) ===== -->
+
+  <div class="modal fade" id="modalCarrito"
+       tabindex="-1" role="dialog"
+       aria-labelledby="tituloCarrito"
+       aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+
+        <!-- Encabezado -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloCarrito">
+            🛒 Mi carrito de compras
+          </h5>
+
+          <button type="button" class="close"
+                  data-dismiss="modal"
+                  aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Contenido -->
+        <div class="modal-body">
+
+          <!-- Mensaje cuando el carrito está vacío -->
+          <div ng-if="carrito.length === 0"
+               class="alert alert-info text-center">
+            Tu carrito está vacío.
+          </div>
+
+          <!-- Tabla de productos -->
+          <div class="table-responsive"
+               ng-if="carrito.length > 0">
+
+            <table class="table table-bordered table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="item in carrito">
+
+                  <td>
+                    {{ item.producto.title }}
+                  </td>
+
+                  <td>
+                    {{ item.producto.price | currency:"$" }}
+                  </td>
+
+                  <td>
+                    {{ item.cantidad }}
+                  </td>
+
+                  <td>
+                    {{ item.producto.price * item.cantidad | currency:"$" }}
+                  </td>
+
+                  <td>
+                    <button type="button"
+                            class="btn btn-danger btn-sm"
+                            ng-click="eliminarDelCarrito($index)">
+                      Eliminar
+                    </button>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Total -->
+          <div class="text-right mt-3">
+            <h4>
+              Total a pagar:
+              {{ totalCarrito() | currency:"$" }}
+            </h4>
+          </div>
+
+        </div>
+
+        <!-- Botones -->
+        <div class="modal-footer">
+
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal">
+            Cerrar
+          </button>
+
+          <button type="button"
+                  class="btn btn-success"
+                  ng-click="pagar()"
+                  ng-disabled="carrito.length === 0">
+            Pagar
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 
   <footer>Desafío Práctico 2 · Lenguajes Interpretados en el Cliente · UDB 2026</footer>
 
