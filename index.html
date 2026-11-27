@@ -11,8 +11,8 @@
 
   <!-- ===== BARRA SUPERIOR: nombre de la tienda y carrito ===== -->
   <nav class="navbar navbar-dark">
-    <!-- PENDIENTE (Orlando): nombre definitivo de la tienda (vende libros) -->
-    <span class="navbar-brand">Tienda en línea</span>
+    <!-- nombre definitivo de la tienda (Orlando)(vende libros) -->
+    <span class="navbar-brand tienda-marca">Cuscatlán Books</span>
 
     <!-- Carrito arriba a la derecha con el total -->
     <!-- PENDIENTE (Josué): abrir el modal del carrito al hacer clic -->
@@ -21,8 +21,48 @@
     </button>
   </nav>
 
-  <!-- ===== SLIDER ===== -->
-  <!-- PENDIENTE (Orlando): slider con al menos 3 imágenes (carousel de Bootstrap) -->
+   <!-- ===== SLIDER (Orlando) Bootstrap carousel, 3 imágenes ===== -->
+  <div id="sliderTienda" class="carousel slide tienda-slider" data-ride="carousel" data-interval="4500">
+    <ol class="carousel-indicators">
+      <li data-target="#sliderTienda" data-slide-to="0" class="active"></li>
+      <li data-target="#sliderTienda" data-slide-to="1"></li>
+      <li data-target="#sliderTienda" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/slide1.jpg" class="d-block w-100" alt="Estantería llena de libros">
+        <div class="carousel-caption tienda-caption">
+          <h2>Tu próxima lectura está aquí</h2>
+          <p>Novelas, ensayo y poesía en un solo lugar.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/slide2.jpg" class="d-block w-100" alt="Persona leyendo en una biblioteca">
+        <div class="carousel-caption tienda-caption">
+          <h2>Lee a tu ritmo</h2>
+          <p>Elige por categoría o busca por título.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="images/slide3.jpg" class="d-block w-100" alt="Pila de libros junto a una taza de café">
+        <div class="carousel-caption tienda-caption">
+          <h2>Compra en pocos clics</h2>
+          <p>Agrega al carrito y paga sin salir de la página.</p>
+        </div>
+      </div>
+    </div>
+
+    <a class="carousel-control-prev" href="#sliderTienda" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#sliderTienda" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Siguiente</span>
+    </a>
+  </div>
+
 
   <main class="container my-4">
 

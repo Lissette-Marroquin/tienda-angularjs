@@ -71,3 +71,72 @@ footer {
   padding: 20px 0;
   text-align: center;
 }
+
+/* ---------- Nombre de la tienda (Orlando) ---------- */
+.tienda-marca {
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  letter-spacing: .01em;
+}
+
+/* ---------- Slider (Orlando) ---------- */
+.tienda-slider .carousel-item {
+  height: 360px;
+  /* fondo de respaldo por si falta alguna imagen */
+  background: linear-gradient(135deg, var(--principal), #2c6a99);
+}
+
+.tienda-slider .carousel-item img {
+  height: 100%;
+  object-fit: cover;
+  opacity: .85;
+}
+
+.tienda-caption {
+  left: 8%;
+  right: auto;
+  bottom: 2.5rem;
+  max-width: 520px;
+  text-align: left;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .55);
+}
+
+.tienda-caption h2 {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 2rem;
+}
+
+.tienda-slider .carousel-indicators li {
+  height: 4px;
+}
+
+/* ---------- Detalles generales (Orlando) ---------- */
+/* Títulos largos: máximo 2 líneas con "..." para que no se encimen con el precio */
+.card-producto .card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.btn-carrito:hover {
+  color: #fff;
+  filter: brightness(.95);
+}
+
+.btn-carrito:focus {
+  box-shadow: 0 0 0 3px rgba(232, 163, 61, .5);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 767px) {
+  .tienda-slider .carousel-item { height: 220px; }
+  .tienda-caption { left: 5%; right: 5%; bottom: 1.5rem; }
+  .tienda-caption h2 { font-size: 1.25rem; }
+  .tienda-caption p { display: none; }
+  .tienda-marca { font-size: 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item { transition: none; }
+}
